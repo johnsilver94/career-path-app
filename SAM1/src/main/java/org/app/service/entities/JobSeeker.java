@@ -8,8 +8,10 @@ import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.DiscriminatorValue;
 @Entity
-public class JobSeeker extends User{
+@DiscriminatorValue("JobSeeker")
+public class JobSeeker extends Users{
 	Integer age;
 	String  name;
 	String 	surname;

@@ -9,7 +9,7 @@
 		<class>org.app.service.entities.Messages</class>
 		<class>org.app.service.entities.Position</class>
 		<class>org.app.service.entities.ProfessionalExperience</class>
-		<class>org.app.service.entities.User</class>
+		<class>org.app.service.entities.Users</class>
 		
       <properties>
          <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>  -->

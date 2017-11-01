@@ -6,9 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
+import javax.persistence.DiscriminatorValue;
 
 @Entity
-public class Company extends User {
+@DiscriminatorValue("Company")
+public class Company extends Users {
 	String name;
 	String address;
 	String description;
