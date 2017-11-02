@@ -3,6 +3,7 @@ package org.app.service.entities;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
@@ -17,8 +18,8 @@ public class JobSeeker extends Users{
 	String 	surname;
 	@OneToOne(cascade = ALL, mappedBy = "jobSeeker")
 	Position position;
-	@OneToMany(mappedBy = "jobSeeker", cascade = ALL, orphanRemoval = true, fetch = EAGER)
+	@OneToMany(mappedBy = "jobSeeker", cascade = ALL, orphanRemoval = true)
 	List<Messages> listMessages;
-	@ManyToMany(fetch = EAGER, mappedBy = "listJobSeeker", cascade = ALL)
+	@ManyToMany(mappedBy = "listJobSeeker", cascade = ALL)
 	List<JobOffer> listJobOfferAplication;
 }
