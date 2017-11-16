@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.DiscriminatorValue;
 @Entity
-@DiscriminatorValue("JobSeeker")
+//@DiscriminatorValue("JobSeeker")
 public class JobSeeker extends Users{
 	Integer age;
 	String  name;

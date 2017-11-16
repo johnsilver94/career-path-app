@@ -48,7 +48,6 @@
 	</dependencyManagement>
 
 	<dependencies>
-
 		<!-- JEE Generic Dependency: CDI, EJB, JPA ... -->
 		<dependency>
 			<groupId>javax</groupId>
