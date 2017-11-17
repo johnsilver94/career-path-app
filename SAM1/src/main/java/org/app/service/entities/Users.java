@@ -1,14 +1,19 @@
 package org.app.service.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.validation.constraints.NotNull;
+
 import static javax.persistence.InheritanceType.TABLE_PER_CLASS;
+
+import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = TABLE_PER_CLASS)
-public abstract class Users {
-	@Id
+public abstract class Users implements Serializable{
+	@Id @GeneratedValue
 	Integer id;
 	String userName;
 	String passWord;

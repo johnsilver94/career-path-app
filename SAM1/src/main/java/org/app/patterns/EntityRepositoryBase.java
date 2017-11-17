@@ -26,7 +26,7 @@ public class EntityRepositoryBase<T extends Object> implements EntityRepository<
 
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 
-	@PersistenceContext(unitName="OracleDS")
+	@PersistenceContext(unitName="SAM1")
 	protected EntityManager em;
 	
 	protected Class<T> repositoryType;

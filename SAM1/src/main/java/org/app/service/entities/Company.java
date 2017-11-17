@@ -13,6 +13,10 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 //@DiscriminatorValue("Company")
 public class Company extends Users {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String name;
 	String address;
 	String description;
@@ -63,14 +67,8 @@ public class Company extends Users {
 		this.listJobOffer = listJobOffer;
 		this.listMessages = listMessages;
 	}
-	public Company(Integer id) {
-		super(id);
-		// TODO Auto-generated constructor stub
-	}
 	public Company(Integer id, String name) {
 		super(id);
 		this.name = name;
 	}
-	
-	
 }

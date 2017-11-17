@@ -8,14 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import javax.transaction.NotSupportedException;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
 
-import org.app.patterns.EntityRepository;
-import org.app.patterns.EntityRepositoryBase;
 import org.app.service.entities.Company;
 import org.jboss.arquillian.core.api.annotation.Inject;
 
@@ -23,14 +17,10 @@ import org.jboss.arquillian.core.api.annotation.Inject;
 public class CompanyServiceEJB implements CompanyService {
 	private static Logger logger = Logger.getLogger(CompanyServiceEJB.class.getName());
 
-	@PersistenceContext(unitName="OracleDS")
- 	private static EntityManager em;
+	@PersistenceContext(unitName="SAM1")//@Inject
+ 	private EntityManager em;
 	
-	@Inject
-	UserTransaction utx;
-	
-	public CompanyServiceEJB() {
-		
+	public CompanyServiceEJB() {	
 	}
 	
     @PostConstruct
@@ -40,37 +30,37 @@ public class CompanyServiceEJB implements CompanyService {
 	
 	@Override
 	public Company addCompany(Company companyToAdd) throws Exception {
-		utx.begin();
+		System.out.println("em = " + em);
 		em.persist(companyToAdd);
 		em.flush();
 		em.refresh(companyToAdd);
-		utx.commit();
 		return companyToAdd;
 	}
 
 	@Override
 	public String removeCompany(Company companyToDelete) throws Exception {
-		utx.begin();
 		companyToDelete = em.merge(companyToDelete);
 		em.remove(companyToDelete);
 		em.flush();
-		utx.commit();
 		return "True";
 	}
 
 	@Override
-	public Company getCompanyById(Integer companyId) throws Exception {
-		return em.createQuery("SELECT u FROM Users WHERE u.id = :id", Company.class)
-			   .setParameter("id", companyId)
+	public Company getCompanyByName(String companyName) throws Exception {
+		return em.createQuery("SELECT u FROM Users u WHERE u.name = :name", Company.class)
+			   .setParameter("id", companyName)
 			   .getSingleResult();
 	}
 
 	@Override
 	public Collection<Company> getCompanies() throws Exception {
-		utx.begin();
-		List<Company> companies = em.createQuery("SELECT c FROM Company",Company.class)
+		List<Company> companies = em.createQuery("SELECT c FROM Company c",Company.class)
 						.getResultList();
-		utx.commit();
 		return companies;
+	}
+
+	@Override
+	public String saySomething() throws Exception {
+		return "Hello!!";
 	}
 }

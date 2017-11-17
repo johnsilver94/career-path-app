@@ -13,6 +13,10 @@ import javax.persistence.DiscriminatorValue;
 @Entity
 //@DiscriminatorValue("JobSeeker")
 public class JobSeeker extends Users{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Integer age;
 	String  name;
 	String 	surname;
