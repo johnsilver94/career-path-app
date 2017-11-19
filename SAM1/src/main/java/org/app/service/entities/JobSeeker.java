@@ -20,7 +20,7 @@ public class JobSeeker extends Users{
 	Integer age;
 	String  name;
 	String 	surname;
-	@OneToOne(cascade = ALL, mappedBy = "jobSeeker")
+	@OneToOne
 	Position position;
 	@OneToMany(mappedBy = "jobSeeker", cascade = ALL, orphanRemoval = true)
 	List<Messages> listMessages;

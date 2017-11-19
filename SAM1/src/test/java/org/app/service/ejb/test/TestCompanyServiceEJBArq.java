@@ -30,7 +30,6 @@ public class TestCompanyServiceEJBArq {
 	@EJB@Inject
 	private static CompanyService service;
 	
-	
 	@Deployment
 	public static Archive<?> createDeployment() {
 	        return ShrinkWrap

@@ -17,30 +17,34 @@ public class Company extends Users {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String name;
-	String address;
-	String description;
+	String companyName;
+	String companyRegion;
+	String companyCounty;
+	String companyAddress;
+	String companyDescription;
 	@OneToMany(mappedBy = "company", cascade = ALL, orphanRemoval = true)
 	List<JobOffer> listJobOffer;
 	@OneToMany(mappedBy = "company", cascade = ALL, orphanRemoval = true)
 	List<Messages> listMessages;
+	@OneToMany(orphanRemoval = true, cascade = ALL, mappedBy = "company")
+	List<Employee> listEmployees;
 	public String getName() {
-		return name;
+		return companyName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String companyName) {
+		this.companyName = companyName;
 	}
 	public String getAddress() {
-		return address;
+		return companyAddress;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddress(String companyAddress) {
+		this.companyAddress = companyAddress;
 	}
 	public String getDescription() {
-		return description;
+		return companyDescription;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(String companyDescription) {
+		this.companyDescription = companyDescription;
 	}
 	public List<JobOffer> getListJobOffer() {
 		return listJobOffer;
@@ -58,17 +62,17 @@ public class Company extends Users {
 	public void setListMessages(List<Messages> listMessages) {
 		this.listMessages = listMessages;
 	}
-	public Company(String name, String address, String description, List<JobOffer> listJobOffer,
+	public Company(String companyName, String companyAddress, String companyDescription, List<JobOffer> listJobOffer,
 			List<Messages> listMessages) {
 		super();
-		this.name = name;
-		this.address = address;
-		this.description = description;
+		this.companyName = companyName;
+		this.companyAddress = companyAddress;
+		this.companyDescription = companyDescription;
 		this.listJobOffer = listJobOffer;
 		this.listMessages = listMessages;
 	}
-	public Company(Integer id, String name) {
+	public Company(Integer id, String companyName) {
 		super(id);
-		this.name = name;
+		this.companyName = companyName;
 	}
 }

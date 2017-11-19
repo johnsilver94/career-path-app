@@ -14,15 +14,17 @@ import java.io.Serializable;
 @Inheritance(strategy = TABLE_PER_CLASS)
 public abstract class Users implements Serializable{
 	@Id @GeneratedValue
-	Integer id;
+	Integer idUser;
 	String userName;
 	String passWord;
+	String email;
+	Long telNumber;
 	
 	public Integer getId() {
-		return id;
+		return idUser;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer idUser) {
+		this.idUser = idUser;
 	}
 	public String getUserName() {
 		return userName;
@@ -36,13 +38,13 @@ public abstract class Users implements Serializable{
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
-	public Users(Integer id) {
+	public Users(Integer idUser) {
 		super();
-		this.id = id;
+		this.idUser = idUser;
 	}
-	public Users(Integer id, String userName, String passWord) {
+	public Users(Integer idUser, String userName, String passWord) {
 		super();
-		this.id = id;
+		this.idUser = idUser;
 		this.userName = userName;
 		this.passWord = passWord;
 	}

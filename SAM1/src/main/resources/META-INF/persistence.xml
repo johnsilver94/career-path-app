@@ -5,6 +5,9 @@
 		<jta-data-source>java:/OracleDS</jta-data-source>
 		<class>org.app.service.entities.CV</class>
 		<class>org.app.service.entities.Company</class>
+		<class>org.app.service.entities.Departament</class>
+		<class>org.app.service.entities.Education</class>
+		<class>org.app.service.entities.Employee</class>
 		<class>org.app.service.entities.JobOffer</class>
 		<class>org.app.service.entities.JobSeeker</class>
 		<class>org.app.service.entities.Messages</class>

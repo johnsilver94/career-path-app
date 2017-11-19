@@ -9,11 +9,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Position implements Serializable {
-	@Id@GeneratedValue
-	Integer idPosition;
-	String  name;
-	String  description;
+public class Employee implements Serializable {
+	@Id @GeneratedValue
+	Integer idEmployee;
+	@OneToOne
+	JobSeeker employee;
+	@OneToOne
+	Position position;
 	@ManyToOne
-	Departament departament;
+	Company company;
 }
