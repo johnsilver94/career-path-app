@@ -24,7 +24,7 @@ public class Company extends Users {
 	String companyDescription;
 	@OneToMany(mappedBy = "company", cascade = ALL, orphanRemoval = true)
 	List<JobOffer> listJobOffer;
-	@OneToMany(mappedBy = "company", cascade = ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "company", cascade = ALL, orphanRemoval = true, fetch = EAGER)
 	List<Messages> listMessages;
 	@OneToMany(orphanRemoval = true, cascade = ALL, mappedBy = "company")
 	List<Employee> listEmployees;

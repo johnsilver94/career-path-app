@@ -9,14 +9,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+
+import org.app.service.enums.CareerLevel;
+
 import javax.persistence.OneToMany;
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 public class CV implements Serializable {
-	@Id @GeneratedValue
+	@Id
+	@SequenceGenerator(name = "SEQ_CV", allocationSize = 1, initialValue = 1, sequenceName = "SEQ_CV")
+	@GeneratedValue(generator = "SEQ_CV", strategy = SEQUENCE)
 	Integer id;
-	String careerLevel;
+	CareerLevel careerLevel;
 	String joinInterestArea;
 	String objectives;
 	@OneToOne

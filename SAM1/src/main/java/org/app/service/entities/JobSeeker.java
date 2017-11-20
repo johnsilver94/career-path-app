@@ -1,3 +1,4 @@
+
 package org.app.service.entities;
 
 import java.util.List;
@@ -26,4 +27,20 @@ public class JobSeeker extends Users{
 	List<Messages> listMessages;
 	@ManyToMany(mappedBy = "listJobSeeker", cascade = ALL)
 	List<JobOffer> listJobOfferAplication;
+	public JobSeeker(Integer idUser, String name) {
+		super(idUser);
+		this.name = name;
+	}
+	public JobSeeker() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public JobSeeker(Integer idUser, String userName, String passWord) {
+		super(idUser, userName, passWord);
+		// TODO Auto-generated constructor stub
+	}
+	public JobSeeker(Integer idUser) {
+		super(idUser);
+		// TODO Auto-generated constructor stub
+	}
 }

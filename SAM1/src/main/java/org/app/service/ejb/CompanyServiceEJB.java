@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.app.service.entities.Company;
+import org.app.service.entities.JobSeeker;
+import org.app.service.entities.Messages;
 import org.jboss.arquillian.core.api.annotation.Inject;
 
 @Stateless @LocalBean
@@ -31,10 +33,17 @@ public class CompanyServiceEJB implements CompanyService {
 	@Override
 	public Company addCompany(Company companyToAdd) throws Exception {
 		System.out.println("em = " + em);
-		em.persist(companyToAdd);
-		em.flush();
-		em.refresh(companyToAdd);
-		return companyToAdd;
+			if(companyToAdd.getId() == null)
+			{
+				em.persist(companyToAdd);
+				em.flush();
+				em.refresh(companyToAdd);
+			}
+			else 
+			{
+				em.merge(companyToAdd);
+			}
+			return companyToAdd;
 	}
 
 	@Override
@@ -47,9 +56,9 @@ public class CompanyServiceEJB implements CompanyService {
 
 	@Override
 	public Company getCompanyByName(String companyName) throws Exception {
-		return em.createQuery("SELECT u FROM Users u WHERE u.name = :name", Company.class)
-			   .setParameter("id", companyName)
-			   .getSingleResult();
+		return em.createQuery("SELECT c FROM Company c WHERE c.companyName = :name", Company.class)
+			   .setParameter("name", companyName)
+			   .getResultList().get(0);
 	}
 
 	@Override
@@ -62,5 +71,12 @@ public class CompanyServiceEJB implements CompanyService {
 	@Override
 	public String saySomething() throws Exception {
 		return "Hello!!";
+	}
+
+	@Override
+	public Company getCompanyById(Integer id) throws Exception {
+		return em.createQuery("SELECT c FROM Company c WHERE c.idUser = :id",Company.class)
+				.setParameter("id", id)
+				.getSingleResult();
 	}
 }

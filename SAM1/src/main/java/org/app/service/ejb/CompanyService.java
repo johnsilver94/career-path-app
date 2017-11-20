@@ -5,6 +5,8 @@ import java.util.Collection;
 import javax.ejb.Remote;
 
 import org.app.service.entities.Company;
+import org.app.service.entities.JobSeeker;
+import org.app.service.entities.Messages;
 
 @Remote
 public interface CompanyService {
@@ -14,6 +16,8 @@ public interface CompanyService {
 	String  removeCompany(Company companyToDelete) throws Exception;
 	
 	Company getCompanyByName(String companyName) throws Exception;
+	
+	Company getCompanyById(Integer id) throws Exception;
 	
 	Collection<Company> getCompanies() throws Exception;
 
