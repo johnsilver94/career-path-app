@@ -6,7 +6,6 @@ import javax.ejb.Remote;
 
 import org.app.service.entities.Company;
 import org.app.service.entities.JobSeeker;
-import org.app.service.entities.Messages;
 
 @Remote
 public interface CompanyService {

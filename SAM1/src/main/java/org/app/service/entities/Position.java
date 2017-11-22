@@ -16,7 +16,7 @@ public class Position implements Serializable {
 	@Id
 	@SequenceGenerator(name = "SEQ_Position", allocationSize = 1, initialValue = 1, sequenceName = "SEQ_Position")
 	@GeneratedValue(generator = "SEQ_Position", strategy = SEQUENCE)
-	Integer idPosition;
+	Long idPosition;
 	String  name;
 	String  description;
 	@ManyToOne

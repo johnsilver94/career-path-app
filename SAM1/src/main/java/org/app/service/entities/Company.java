@@ -9,6 +9,7 @@ import static javax.persistence.FetchType.EAGER;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Basic;
 import static javax.persistence.FetchType.LAZY;
+import javax.persistence.ManyToMany;
 
 @Entity
 //@DiscriminatorValue("Company")
@@ -18,27 +19,18 @@ public class Company extends Users {
 	 */
 	private static final long serialVersionUID = 1L;
 	String companyName;
-	String companyRegion;
-	String companyCounty;
-	String companyAddress;
 	String companyDescription;
 	@OneToMany(mappedBy = "company", cascade = ALL, orphanRemoval = true)
 	List<JobOffer> listJobOffer;
-	@OneToMany(mappedBy = "company", cascade = ALL, orphanRemoval = true, fetch = EAGER)
-	List<Messages> listMessages;
 	@OneToMany(orphanRemoval = true, cascade = ALL, mappedBy = "company")
 	List<Employee> listEmployees;
+	@ManyToMany(mappedBy = "projectCompanies")
+	List<Project> listProjects;
 	public String getName() {
 		return companyName;
 	}
 	public void setName(String companyName) {
 		this.companyName = companyName;
-	}
-	public String getAddress() {
-		return companyAddress;
-	}
-	public void setAddress(String companyAddress) {
-		this.companyAddress = companyAddress;
 	}
 	public String getDescription() {
 		return companyDescription;
@@ -56,22 +48,21 @@ public class Company extends Users {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public List<Messages> getListMessages() {
+	public List<Message> getListMessages() {
 		return listMessages;
 	}
-	public void setListMessages(List<Messages> listMessages) {
+	public void setListMessages(List<Message> listMessages) {
 		this.listMessages = listMessages;
 	}
-	public Company(String companyName, String companyAddress, String companyDescription, List<JobOffer> listJobOffer,
-			List<Messages> listMessages) {
+	public Company(String companyName,  String companyDescription, List<JobOffer> listJobOffer,
+			List<Message> listMessages) {
 		super();
 		this.companyName = companyName;
-		this.companyAddress = companyAddress;
 		this.companyDescription = companyDescription;
 		this.listJobOffer = listJobOffer;
 		this.listMessages = listMessages;
 	}
-	public Company(Integer id, String companyName) {
+	public Company(Long id, String companyName) {
 		super(id);
 		this.companyName = companyName;
 	}

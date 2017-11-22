@@ -5,16 +5,26 @@
 		<jta-data-source>java:/OracleDS</jta-data-source>
 		<class>org.app.service.entities.CV</class>
 		<class>org.app.service.entities.Company</class>
+		<class>org.app.service.entities.Degree</class>
 		<class>org.app.service.entities.Departament</class>
 		<class>org.app.service.entities.Education</class>
 		<class>org.app.service.entities.Employee</class>
 		<class>org.app.service.entities.JobOffer</class>
 		<class>org.app.service.entities.JobSeeker</class>
-		<class>org.app.service.entities.Messages</class>
+		<class>org.app.service.entities.Language</class>
+		<class>org.app.service.entities.Location</class>
+		<class>org.app.service.entities.Message</class>
+		<class>org.app.service.entities.Notification</class>
 		<class>org.app.service.entities.Position</class>
-		<class>org.app.service.entities.ProfessionalExperience</class>
+		<class>org.app.service.entities.ProfExp</class>
+		<class>org.app.service.entities.ProfExpPosition</class>
+		<class>org.app.service.entities.ProfExpProject</class>
+		<class>org.app.service.entities.Program</class>
+		<class>org.app.service.entities.Project</class>
+		<class>org.app.service.entities.School</class>
+		<class>org.app.service.entities.Skill</class>
+		<class>org.app.service.entities.StudyField</class>
 		<class>org.app.service.entities.Users</class>
-		
       <properties>
          <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>  -->
          <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>

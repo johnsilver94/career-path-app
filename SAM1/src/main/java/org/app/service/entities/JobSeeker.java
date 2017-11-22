@@ -22,12 +22,10 @@ public class JobSeeker extends Users{
 	String  name;
 	String 	surname;
 	@OneToOne
-	Position position;
-	@OneToMany(mappedBy = "jobSeeker", cascade = ALL, orphanRemoval = true)
-	List<Messages> listMessages;
-	@ManyToMany(mappedBy = "listJobSeeker", cascade = ALL)
+	CV cv;
+	@ManyToMany
 	List<JobOffer> listJobOfferAplication;
-	public JobSeeker(Integer idUser, String name) {
+	public JobSeeker(Long idUser, String name) {
 		super(idUser);
 		this.name = name;
 	}
@@ -35,11 +33,11 @@ public class JobSeeker extends Users{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public JobSeeker(Integer idUser, String userName, String passWord) {
+	public JobSeeker(Long idUser, String userName, String passWord) {
 		super(idUser, userName, passWord);
 		// TODO Auto-generated constructor stub
 	}
-	public JobSeeker(Integer idUser) {
+	public JobSeeker(Long idUser) {
 		super(idUser);
 		// TODO Auto-generated constructor stub
 	}

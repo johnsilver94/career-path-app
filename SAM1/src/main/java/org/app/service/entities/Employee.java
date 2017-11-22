@@ -16,8 +16,8 @@ public class Employee implements Serializable {
 	@Id
 	@SequenceGenerator(name = "SEQ_Employee", allocationSize = 1, initialValue = 1, sequenceName = "SEQ_Employee")
 	@GeneratedValue(generator = "SEQ_Employee", strategy = SEQUENCE)
-	Integer idEmployee;
-	@OneToOne
+	Long idEmployee;
+	@ManyToOne
 	JobSeeker employee;
 	@OneToOne
 	Position position;

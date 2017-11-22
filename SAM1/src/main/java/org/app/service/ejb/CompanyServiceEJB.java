@@ -12,7 +12,6 @@ import javax.persistence.PersistenceContext;
 
 import org.app.service.entities.Company;
 import org.app.service.entities.JobSeeker;
-import org.app.service.entities.Messages;
 import org.jboss.arquillian.core.api.annotation.Inject;
 
 @Stateless @LocalBean

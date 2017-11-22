@@ -15,19 +15,22 @@ import static javax.persistence.CascadeType.ALL;
 
 @Entity
 public class School implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7980784101571043564L;
 	@Id
 	@SequenceGenerator(name = "SEQ_School", allocationSize = 1, initialValue = 1, sequenceName = "SEQ_School")
 	@GeneratedValue(generator = "SEQ_School", strategy = SEQUENCE)
-	Integer idSchool;
+	Long idSchool;
 	String name;
-	String region;
-	String city;
-	String address;
+	Location location;
 	String acceptanceRate;
 	String phoneNumber;
 	String description;
 	String studyField;
 	String parentOrganization;
 	String webSite;
-	List<Programs> listPrograms;
+	@OneToMany(orphanRemoval = true, cascade = ALL, mappedBy = "school")
+	List<StudyField> listStudyFields;
 }

@@ -12,9 +12,7 @@ import javax.ejb.EJB;
 import org.app.service.ejb.CompanyService;
 import org.app.service.ejb.CompanyServiceEJB;
 import org.app.service.entities.Company;
-import org.app.service.entities.JobOffer;
-import org.app.service.entities.JobSeeker;
-import org.app.service.entities.Messages;
+import org.app.service.entities.Message;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.core.api.annotation.Inject;
 import org.jboss.arquillian.junit.Arquillian;
@@ -38,7 +36,7 @@ public class TestCompanyServiceEJBArq {
 	@Deployment
 	public static Archive<?> createDeployment() {
 	        return ShrinkWrap
-	                .create(WebArchive.class, "SAM1.war")
+	                .create(WebArchive.class/*, "SAM1.war"*/)
 	                .addPackage(Company.class.getPackage())
 	                .addClass(CompanyService.class)
 	                .addClass(CompanyServiceEJB.class)
@@ -46,7 +44,7 @@ public class TestCompanyServiceEJBArq {
 	                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	   }
 	
-	//@Test
+	@Test
 	public void test1_addCompany() throws Exception {
 		logger.info("DEBUG: Junit TESTING: addCompany ...");
 		
@@ -83,7 +81,7 @@ public class TestCompanyServiceEJBArq {
 		Company company	= service.getCompanyByName("Company_2");
 		assertTrue("Fail to get company by name!",company.getId()==2);
 	}
-	//@Test
+	@Test
 	public void test5_saySomething() throws Exception {
 		logger.info("DEBUG: Junit TESTING: saySomething...");
 		service.saySomething();
@@ -101,13 +99,13 @@ public class TestCompanyServiceEJBArq {
 		
 		Company company = service.addCompany(new Company(null,"MyCompany"));
 		Integer nrMessage = 5;
-		List<Messages> listMessages = new ArrayList<Messages>();
+		List<Message> listMessages = new ArrayList<Message>();
 		for(int i=1;i<=nrMessage;i++)
 		{
-			listMessages.add(new Messages(null,"title_"+i,"text_"+i,null,company));
+			listMessages.add(new Message(null,"title_"+i,"text_"+i,company,null));
 		}
 		company.setListMessages(listMessages);
-		company.setAddress("asdas");
+		company.setDescription("asdas");
 		company = service.addCompany(company);
 		
 		assertTrue("Fail to add Company and Message",company.getListMessages().size()!=0);
