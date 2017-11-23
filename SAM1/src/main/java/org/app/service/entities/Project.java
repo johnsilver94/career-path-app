@@ -21,7 +21,5 @@ public class Project  implements Serializable{
 	String name;
 	@ManyToMany
 	List<Company> projectCompanies;
-	@OneToMany
-	List<ProfExp> projectSeekers;
 	String description;
 }

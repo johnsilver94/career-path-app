@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import static javax.persistence.CascadeType.ALL;
 @Entity
 public class JobOffer implements Serializable{
@@ -22,7 +24,7 @@ public class JobOffer implements Serializable{
 	@SequenceGenerator(name = "SEQ_JobOffer", allocationSize = 1, initialValue = 1, sequenceName = "SEQ_JobOffer")
 	@GeneratedValue(generator = "SEQ_JobOffer", strategy = SEQUENCE)
 	Long idOffer;
-	@ManyToOne
+	@OneToOne
 	Position position;
 	@ManyToOne
 	Company  company;
@@ -39,6 +41,7 @@ public class JobOffer implements Serializable{
 	JOStatus status;
 	@OneToMany
 	List<Skill> listRequiredSkills;  
+	// Maybe list must mapped in JobSeeker class
 	@ManyToMany(cascade = ALL, mappedBy = "listJobOfferAplication")
 	List<JobSeeker> listJobSeeker;
 	public JobOffer() {

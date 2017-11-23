@@ -23,10 +23,6 @@ public class Departament implements Serializable {
 	Long idDepartament;
 	String name;
 	String description;	
-	Double fromSalary;
-	Double toSalary;
 	@OneToMany(orphanRemoval = true, cascade = ALL, mappedBy = "departament")
 	List<Position> listPositions;
-	@OneToMany
-	List<Degree> listDegreeRequired;
 }

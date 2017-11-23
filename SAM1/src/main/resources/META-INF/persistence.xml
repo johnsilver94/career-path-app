@@ -15,12 +15,16 @@
 		<class>org.app.service.entities.Location</class>
 		<class>org.app.service.entities.Message</class>
 		<class>org.app.service.entities.Notification</class>
+		<class>org.app.service.entities.PatchTest</class>
 		<class>org.app.service.entities.Position</class>
+		<class>org.app.service.entities.Preference</class>
 		<class>org.app.service.entities.ProfExp</class>
 		<class>org.app.service.entities.ProfExpPosition</class>
 		<class>org.app.service.entities.ProfExpProject</class>
 		<class>org.app.service.entities.Program</class>
 		<class>org.app.service.entities.Project</class>
+		<class>org.app.service.entities.Question</class>
+		<class>org.app.service.entities.ResOption</class>
 		<class>org.app.service.entities.School</class>
 		<class>org.app.service.entities.Skill</class>
 		<class>org.app.service.entities.StudyField</class>

@@ -8,8 +8,11 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.CascadeType.ALL;
 
@@ -24,11 +27,11 @@ public class School implements Serializable {
 	@GeneratedValue(generator = "SEQ_School", strategy = SEQUENCE)
 	Long idSchool;
 	String name;
+	@OneToOne
 	Location location;
 	String acceptanceRate;
 	String phoneNumber;
 	String description;
-	String studyField;
 	String parentOrganization;
 	String webSite;
 	@OneToMany(orphanRemoval = true, cascade = ALL, mappedBy = "school")

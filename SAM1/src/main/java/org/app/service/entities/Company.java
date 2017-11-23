@@ -24,6 +24,7 @@ public class Company extends Users {
 	List<JobOffer> listJobOffer;
 	@OneToMany(orphanRemoval = true, cascade = ALL, mappedBy = "company")
 	List<Employee> listEmployees;
+	//maybe inverse
 	@ManyToMany(mappedBy = "projectCompanies")
 	List<Project> listProjects;
 	public String getName() {

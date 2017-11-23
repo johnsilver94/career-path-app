@@ -14,7 +14,7 @@ public class Location implements Serializable {
 	@Id
 	@SequenceGenerator(name = "SEQ_Location", allocationSize = 1, initialValue = 1, sequenceName = "SEQ_Location")
 	@GeneratedValue(generator = "SEQ_Location", strategy = SEQUENCE)
-	Long Location;
+	Long IdLocation;
 	String country;
 	String region;
 	String county;

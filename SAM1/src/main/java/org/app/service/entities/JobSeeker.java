@@ -22,6 +22,10 @@ public class JobSeeker extends Users{
 	String  name;
 	String 	surname;
 	@OneToOne
+	Preference preference;
+	@OneToMany
+	List<Skill> pathTestSkill;
+	@OneToOne
 	CV cv;
 	@ManyToMany
 	List<JobOffer> listJobOfferAplication;

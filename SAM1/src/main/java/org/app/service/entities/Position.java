@@ -3,6 +3,7 @@ package org.app.service.entities;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Position implements Serializable {
@@ -19,6 +21,10 @@ public class Position implements Serializable {
 	Long idPosition;
 	String  name;
 	String  description;
+	Double fromSalary;
+	Double toSalary;
 	@ManyToOne
 	Departament departament;
+	@OneToMany
+	List<Degree> listDegreeSugerated;
 }
