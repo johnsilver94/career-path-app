@@ -53,7 +53,7 @@ public class CompanyServiceEJB implements CompanyService {
 	
 	
 	@PUT @Path("/{id}")
-	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML/*, MediaType.APPLICATION_JSON*/})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	@Override
@@ -93,7 +93,14 @@ public class CompanyServiceEJB implements CompanyService {
 		em.flush();
 		return this.getCompanies();
 	}
-
+	
+	@DELETE @Path("/{id}") 
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public String remove(@PathParam("id")Long id) throws Exception {
+		Company company = this.getCompanyById(id);
+		em.remove(company);
+		return "True";
+	}
 	@Override
 	public Company getCompanyByName(String companyName) throws Exception {
 		return em.createQuery("SELECT c FROM Company c WHERE c.companyName = :name", Company.class)

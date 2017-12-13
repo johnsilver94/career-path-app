@@ -132,12 +132,11 @@ public class JobOffer implements Serializable{
 		this.responsabilities = responsabilities;
 	}
 	
-	public static String BASE_URL = Company.BASE_URL;
+	public static String BASE_URL = "http://localhost:8080/SAM/data/jobOffers";
 	@XmlElement(name = "link")
     public AtomLink getLink() throws Exception {
 		String restUrl = BASE_URL 
-				+ ((this.getCompany() != null) ? this.getCompany().getIdUser() : "")
-				+ "/jobOffers/" 
+				+ "/"
 				+ this.getIdOffer();
         return new AtomLink(restUrl, "get-jobOffers");
     }	

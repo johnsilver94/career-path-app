@@ -14,6 +14,8 @@ import java.util.List;
 
 import javax.persistence.SequenceGenerator;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlTransient;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
@@ -42,12 +44,14 @@ public abstract class Users implements Serializable{
 	@OneToMany(cascade = ALL, orphanRemoval = true, mappedBy = "user", fetch = LAZY)
 	List<Feedback> listFeedback;*/
 	
+	@XmlElement
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	@XmlElement
 	public String getPassWord() {
 		return passWord;
 	}
@@ -58,11 +62,10 @@ public abstract class Users implements Serializable{
 		super();
 		this.idUser = idUser;
 	}
-	
+	@XmlElementWrapper(name = "messages") @XmlElement(name = "message")
 	public List<Message> getListMessages() {
 		return listMessages;
 	}
-	@XmlElement
 	public Long getIdUser() {
 		return idUser;
 	}

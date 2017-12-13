@@ -113,7 +113,7 @@ public class TestUserServiceEJBArq {
 		Feedback feedbackToAdd = new Feedback(null,null,null,"Good!");
 		service.addFeedback(curentUser, feedbackToAdd, aboutUser);
 		
-		//assertTrue("Fail to modifyUser!",service.getById(curentUser.getId()).getListFeedback().size()>=0);
+		//assertTrue("Fail to modifyUser!",service.getById(curentUser.getIdUser()).getListFeedback().size()>=0);
 	}
 	
 }

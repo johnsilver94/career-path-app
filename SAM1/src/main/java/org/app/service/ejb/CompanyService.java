@@ -3,6 +3,11 @@ package org.app.service.ejb;
 import java.util.Collection;
 
 import javax.ejb.Remote;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 import org.app.service.entities.Company;
 import org.app.service.entities.Employee;
@@ -16,6 +21,9 @@ public interface CompanyService {
 	Company addCompany(Company companyToAdd) throws Exception;
 	
 	Collection<Company>  removeCompany(Company companyToDelete) throws Exception;
+	
+
+	String remove(Long id) throws Exception ;
 	
 	Company getCompanyByName(String companyName) throws Exception;
 	

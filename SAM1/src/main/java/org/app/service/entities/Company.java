@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
@@ -30,7 +31,7 @@ public class Company extends Users {
 	String companyDescription;
 	@OneToMany(mappedBy = "company", cascade = ALL, orphanRemoval = true, fetch = EAGER)
 	List<JobOffer> listJobOffer;
-	@OneToMany(orphanRemoval = true, cascade = ALL, mappedBy = "company")
+	@OneToMany(orphanRemoval = false, cascade = ALL, mappedBy = "company")
 	List<Employee> listEmployees;
 	//maybe inverse
 	@ManyToMany(mappedBy = "projectCompanies")
@@ -47,13 +48,6 @@ public class Company extends Users {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public List<Message> getListMessages() {
-		return listMessages;
-	}
-	public void setListMessages(List<Message> listMessages) {
-		this.listMessages = listMessages;
-	}
-	
 	@XmlElement
 	public String getCompanyName() {
 		return companyName;
@@ -69,6 +63,7 @@ public class Company extends Users {
 	public void setCompanyDescription(String companyDescription) {
 		this.companyDescription = companyDescription;
 	}
+	//@XmlElementWrapper(name = "employees") @XmlElement(name = "employee")
 	public List<Employee> getListEmployees() {
 		return listEmployees;
 	}
@@ -94,7 +89,7 @@ public class Company extends Users {
 		this.companyName = companyName;
 	}
 	
-	public static String BASE_URL = "http://localhost:8080/SAM1/data/companies";
+	public static String BASE_URL = "http://localhost:8080/SAM/data/companies";
 	
 	@XmlElement(name="link") 
 	public AtomLink getLink() throws Exception
