@@ -45,4 +45,16 @@ public class JobSeeker extends Users{
 		super(idUser);
 		// TODO Auto-generated constructor stub
 	}
+	public JobSeeker(Long idUser, Integer age, String name, String surname, Preference preference,
+			List<Skill> pathTestSkill, CV cv, List<JobOffer> listJobOfferAplication) {
+		super(idUser);
+		this.age = age;
+		this.name = name;
+		this.surname = surname;
+		this.preference = preference;
+		this.pathTestSkill = pathTestSkill;
+		this.cv = cv;
+		this.listJobOfferAplication = listJobOfferAplication;
+	}
+	
 }

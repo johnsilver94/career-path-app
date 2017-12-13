@@ -174,7 +174,10 @@ public class EntityRepositoryBase<T extends Object> implements EntityRepository<
 		// em.getTransaction().begin();
 		try {
 //			provideUri(entity);
-			em.merge(entity);
+			//em.merge(entity);
+			em.persist(entity);
+			em.flush();
+			em.refresh(entity);
 			// em.getTransaction().commit();
 			return entity;
 		} catch (Exception e) {
@@ -182,7 +185,7 @@ public class EntityRepositoryBase<T extends Object> implements EntityRepository<
 			// em.getTransaction().rollback();
 			return null;
 		} finally {
-			// em.close();
+			//em.close();
 		}
 	}
 
@@ -266,7 +269,7 @@ public class EntityRepositoryBase<T extends Object> implements EntityRepository<
 	@Override
 	public T refresh(T entity) {
 		entity = em.merge(entity);
-		em.refresh(entity);
+		//em.refresh(entity);
 		return entity;
 	}
 	

@@ -9,6 +9,7 @@
 		<class>org.app.service.entities.Departament</class>
 		<class>org.app.service.entities.Education</class>
 		<class>org.app.service.entities.Employee</class>
+		<class>org.app.service.entities.Feedback</class>
 		<class>org.app.service.entities.JobOffer</class>
 		<class>org.app.service.entities.JobSeeker</class>
 		<class>org.app.service.entities.Language</class>

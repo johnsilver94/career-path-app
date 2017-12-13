@@ -20,6 +20,8 @@ public class Preference implements Serializable {
 	@SequenceGenerator(name = "SEQ_Preference", allocationSize = 1, initialValue = 1, sequenceName = "SEQ_Preference")
 	@GeneratedValue(generator = "SEQ_Preference", strategy = SEQUENCE)
 	Long idPreference;
+	@OneToOne
+	JobSeeker jobSeeker;
 	@Enumerated(EnumType.STRING)
 	WorkEnvironment workEnvironment;
 	@Enumerated(EnumType.STRING)

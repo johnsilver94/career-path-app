@@ -4,6 +4,12 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 import javax.persistence.DiscriminatorValue;
@@ -12,6 +18,8 @@ import static javax.persistence.FetchType.LAZY;
 import javax.persistence.ManyToMany;
 
 @Entity
+@XmlRootElement(name="company")
+@XmlAccessorType(XmlAccessType.NONE)
 //@DiscriminatorValue("Company")
 public class Company extends Users {
 	/**
@@ -20,25 +28,15 @@ public class Company extends Users {
 	private static final long serialVersionUID = 1L;
 	String companyName;
 	String companyDescription;
-	@OneToMany(mappedBy = "company", cascade = ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "company", cascade = ALL, orphanRemoval = true, fetch = EAGER)
 	List<JobOffer> listJobOffer;
 	@OneToMany(orphanRemoval = true, cascade = ALL, mappedBy = "company")
 	List<Employee> listEmployees;
 	//maybe inverse
 	@ManyToMany(mappedBy = "projectCompanies")
 	List<Project> listProjects;
-	public String getName() {
-		return companyName;
-	}
-	public void setName(String companyName) {
-		this.companyName = companyName;
-	}
-	public String getDescription() {
-		return companyDescription;
-	}
-	public void setDescription(String companyDescription) {
-		this.companyDescription = companyDescription;
-	}
+
+	@XmlElementWrapper(name = "jobOffers") @XmlElement(name = "jobOffer")
 	public List<JobOffer> getListJobOffer() {
 		return listJobOffer;
 	}
@@ -55,6 +53,34 @@ public class Company extends Users {
 	public void setListMessages(List<Message> listMessages) {
 		this.listMessages = listMessages;
 	}
+	
+	@XmlElement
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	
+	@XmlElement
+	public String getCompanyDescription() {
+		return companyDescription;
+	}
+	public void setCompanyDescription(String companyDescription) {
+		this.companyDescription = companyDescription;
+	}
+	public List<Employee> getListEmployees() {
+		return listEmployees;
+	}
+	public void setListEmployees(List<Employee> listEmployees) {
+		this.listEmployees = listEmployees;
+	}
+	public List<Project> getListProjects() {
+		return listProjects;
+	}
+	public void setListProjects(List<Project> listProjects) {
+		this.listProjects = listProjects;
+	}
 	public Company(String companyName,  String companyDescription, List<JobOffer> listJobOffer,
 			List<Message> listMessages) {
 		super();
@@ -67,4 +93,14 @@ public class Company extends Users {
 		super(id);
 		this.companyName = companyName;
 	}
+	
+	public static String BASE_URL = "http://localhost:8080/SAM1/data/companies";
+	
+	@XmlElement(name="link") 
+	public AtomLink getLink() throws Exception
+	{
+		String restUrl = BASE_URL +"/" + this.getIdUser();
+		return new AtomLink(restUrl,"get-Company");
+	}
+	public void setLink(AtomLink link) {}
 }

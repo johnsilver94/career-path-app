@@ -20,4 +20,18 @@ public class Location implements Serializable {
 	String county;
 	String city;
 	String address;
+	public Location() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Location(Long idLocation, String country, String region, String county, String city, String address) {
+		super();
+		IdLocation = idLocation;
+		this.country = country;
+		this.region = region;
+		this.county = county;
+		this.city = city;
+		this.address = address;
+	}
+	
 }
