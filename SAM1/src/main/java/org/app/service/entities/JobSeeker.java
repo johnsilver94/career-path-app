@@ -10,7 +10,13 @@ import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.DiscriminatorValue;
+@XmlRootElement(name="jobSeeker") 
+@XmlAccessorType(XmlAccessType.NONE)
 @Entity
 //@DiscriminatorValue("JobSeeker")
 public class JobSeeker extends Users{
@@ -56,5 +62,13 @@ public class JobSeeker extends Users{
 		this.cv = cv;
 		this.listJobOfferAplication = listJobOfferAplication;
 	}
-	
+	public static String BASE_URL = "http://localhost:8080/SAM/data/jobSeekers";
+	@XmlElement(name = "link")
+    public AtomLink getLink() throws Exception {
+		String restUrl = BASE_URL 
+				+ "/"
+				+ this.getIdUser();
+        return new AtomLink(restUrl, "get-jobSeekers");
+    }	
+	public void setLink(AtomLink link){}
 }

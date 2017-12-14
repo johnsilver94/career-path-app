@@ -16,6 +16,7 @@ import javax.persistence.SequenceGenerator;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -64,6 +65,10 @@ public class JobOffer implements Serializable{
 	}
 	public void setPosition(Position position) {
 		this.position = position;
+	}
+	//@XmlElement
+	public Long getCompanyId(){
+		return this.getCompany().getIdUser();
 	}
 	public Company getCompany() {
 		return company;

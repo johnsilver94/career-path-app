@@ -3,6 +3,7 @@ package org.app.service.rest.test;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ws.rs.client.Client;
@@ -18,6 +19,7 @@ import org.app.service.ejb.CompanyServiceEJB;
 import org.app.service.ejb.JobSeekerService;
 import org.app.service.ejb.JobSeekerServiceEJB;
 import org.app.service.entities.Company;
+import org.app.service.entities.JobOffer;
 import org.app.service.entities.Project;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -53,7 +55,7 @@ public class TestCompanyDataServiceRESTArq {
 	                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	   }
 	
-	@Test
+	//@Test
 	public void test1_saySomething() throws Exception {
 		String resourceURL = serviceURL + "/companyData";
 		logger.info("DEBUG: Junit TESTING: saySomething...");
@@ -96,7 +98,7 @@ public class TestCompanyDataServiceRESTArq {
 		assertTrue("Fail to add Companies!",companies.size() >= nrOfCompany);
 		companies.stream().forEach(System.out::println);
 	}
-	@Test
+	//@Test
 	public void test4_DeleteCompany() {
 		String resourceURL = serviceURL + "/93";
 		logger.info("DEBUG: Junit TESTING: test4_DeleteCompany ...");
@@ -150,5 +152,33 @@ public class TestCompanyDataServiceRESTArq {
 		logger.info(">>> Updated Company: " + company);
 		
 		assertNotNull("REST Data Service failed!", company);
-	}	
+	}
+	//@Test
+	public void test7_AddJobOffersToCompany() {
+		String resourceURL = serviceURL + "/1";
+		logger.info("DEBUG: Junit TESTING: test7_AddJobOffersToCompany ...");
+		
+		Client client = ClientBuilder.newClient();
+		
+		Company company = client.target(resourceURL)
+				.request().accept(MediaType.APPLICATION_XML)
+				.get().readEntity(Company.class);
+		
+		assertNotNull("REST Data Service failed!", company);
+		logger.info(">>>>>> DEBUG: REST Response ..." + company.getIdUser());
+		
+		JobOffer jobOffer = new JobOffer(null,"Default");
+		jobOffer.setCompany(company);
+		company.getListJobOffer().add(jobOffer);
+		
+		company = client.target(resourceURL)
+				.request().accept(MediaType.APPLICATION_XML).header("Content-Type", "application/xml")
+				//.request().accept(MediaType.APPLICATION_JSON)
+				.put(Entity.entity(company, MediaType.APPLICATION_XML))
+				.readEntity(Company.class);
+		
+		logger.info(">>> Updated Company: " + company);
+		
+		assertNotNull("REST Data Service failed!", company);
+	}
 }

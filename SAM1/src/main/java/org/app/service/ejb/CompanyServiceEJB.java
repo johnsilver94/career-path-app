@@ -59,7 +59,7 @@ public class CompanyServiceEJB implements CompanyService {
 	@Override
 	public Company addCompany(Company companyToAdd) throws Exception {
 		System.out.println("em = " + em);
-			if(companyToAdd.getIdUser() == null)
+			if(companyToAdd.getIdUser() == null || this.getCompanyById(companyToAdd.getIdUser()) == null)
 			{
 				em.persist(companyToAdd);
 				em.flush();

@@ -9,15 +9,17 @@ import org.app.service.entities.JobOffer;
 @Remote
 public interface JobOfferService {
 	
-	JobOffer addJobOffer(JobOffer jobOfferToAdd);
+	JobOffer addJobOffer(JobOffer jobOfferToAdd) throws Exception;
 
 	// DELETE
-	Collection<JobOffer> removeJobOffer(JobOffer jobOfferToDelete);
+	Collection<JobOffer> removeJobOffer(JobOffer jobOfferToDelete) throws Exception;
 
 	// READ
-	JobOffer getJobOfferById(Long jobOfferId);
+	JobOffer getJobOfferById(Long jobOfferId) throws Exception;
 	
-	Collection<JobOffer> getJobOffers();
+	Collection<JobOffer> getJobOffers() throws Exception;
+
+	Collection<JobOffer> addIntoJobOffers(JobOffer jobOfferToAdd) throws Exception;
 	
 
 }
