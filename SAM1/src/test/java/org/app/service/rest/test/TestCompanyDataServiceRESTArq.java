@@ -18,6 +18,7 @@ import org.app.service.ejb.CompanyServiceEJB;
 import org.app.service.ejb.JobSeekerService;
 import org.app.service.ejb.JobSeekerServiceEJB;
 import org.app.service.entities.Company;
+import org.app.service.entities.Project;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -63,8 +64,8 @@ public class TestCompanyDataServiceRESTArq {
 		assertNotNull("Fail to read Company!",response);
 		logger.info("DEBUG: EJB Response ..." + response);
 	}
-	
-	@Test
+
+	//@Test
 	public void test2_getCompanies() throws Exception{
 		logger.info("DEBUG: Junit TESTING: test2_getCompanies ...");
 		Collection<Company> companies = ClientBuilder.newClient()
@@ -74,7 +75,7 @@ public class TestCompanyDataServiceRESTArq {
 		assertTrue("Fail to read Companies!", companies.size() >0);
 		companies.stream().forEach(System.out::println);
 	}
-	@Test
+	//@Test
 	public void test3_AddCompany() {
 		logger.info("DEBUG: Junit TESTING: test3_AddCompany ...");
 		Client client = ClientBuilder.newClient();
@@ -82,7 +83,7 @@ public class TestCompanyDataServiceRESTArq {
 		Integer nrOfCompany = 5;
 		Company company;
 		for(int i=1;i<=nrOfCompany;i++) {
-			company = new Company(null,"Company_"+i);
+			company = new Company(null,"NewCompany_"+i);
 			companies = client.target(serviceURL)
 					.request().accept(MediaType.APPLICATION_JSON)
 					.post(Entity.entity(company, MediaType.APPLICATION_JSON))
@@ -95,4 +96,59 @@ public class TestCompanyDataServiceRESTArq {
 		assertTrue("Fail to add Companies!",companies.size() >= nrOfCompany);
 		companies.stream().forEach(System.out::println);
 	}
+	@Test
+	public void test4_DeleteCompany() {
+		String resourceURL = serviceURL + "/93";
+		logger.info("DEBUG: Junit TESTING: test4_DeleteCompany ...");
+		Client client = ClientBuilder.newClient();
+		String Response;
+	    Response = client.target(resourceURL).request().delete().readEntity(String.class);
+	    
+	    
+	    logger.info(">>>>>> DEBUG: REST Response ..." + Response);
+	    assertTrue("Is not deleted!", Response.contains("True"));
+	    /*
+		Collection<Company> companiesAfterDelete = client.target(serviceURL)
+				.request().get()
+				.readEntity(new GenericType<Collection<Company>>() {});
+		assertTrue("Fail to read Projects!", companiesAfterDelete.size() == 0);
+		companiesAfterDelete.stream().forEach(System.out::println);*/
+		
+	}
+	//@Test
+	public void test5_GetByID() {
+		String resourceURL = serviceURL + "/1";
+		logger.info("DEBUG: Junit TESTING: t5_GetByID ...");
+		
+		Company company = ClientBuilder.newClient().target(resourceURL)
+				.request().accept(MediaType.APPLICATION_JSON)
+				.get().readEntity(Company.class);
+		
+		assertNotNull("REST Data Service failed!", company);
+		logger.info(">>>>>> DEBUG: REST Response ..." + company);
+	}
+	//@Test
+	public void test6_UpdateCompany() {
+		String resourceURL = serviceURL + "/1";
+		logger.info("************* DEBUG: Junit TESTING: test6_UpdateCompany ... :" + resourceURL);
+		Client client = ClientBuilder.newClient();
+		
+		Company company = client.target(resourceURL)
+				.request().accept(MediaType.APPLICATION_XML)
+				.get().readEntity(Company.class);
+		
+		assertNotNull("REST Data Service failed!", company);
+		logger.info(">>> Initial Company: " + company);
+		
+		company.setCompanyName(company.getCompanyName() + "_UPD_Name");
+		company = client.target(resourceURL)
+				.request().accept(MediaType.APPLICATION_XML).header("Content-Type", "application/xml")
+				//.request().accept(MediaType.APPLICATION_JSON)
+				.put(Entity.entity(company, MediaType.APPLICATION_XML))
+				.readEntity(Company.class);
+		
+		logger.info(">>> Updated Company: " + company);
+		
+		assertNotNull("REST Data Service failed!", company);
+	}	
 }
