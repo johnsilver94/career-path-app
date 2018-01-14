@@ -100,7 +100,7 @@ public class TestCompanyDataServiceRESTArq {
 	}
 	//@Test
 	public void test4_DeleteCompany() {
-		String resourceURL = serviceURL + "/93";
+		String resourceURL = serviceURL + "/41";
 		logger.info("DEBUG: Junit TESTING: test4_DeleteCompany ...");
 		Client client = ClientBuilder.newClient();
 		String Response;
@@ -119,7 +119,7 @@ public class TestCompanyDataServiceRESTArq {
 	}
 	//@Test
 	public void test5_GetByID() {
-		String resourceURL = serviceURL + "/1";
+		String resourceURL = serviceURL + "/42";
 		logger.info("DEBUG: Junit TESTING: t5_GetByID ...");
 		
 		Company company = ClientBuilder.newClient().target(resourceURL)
@@ -129,9 +129,9 @@ public class TestCompanyDataServiceRESTArq {
 		assertNotNull("REST Data Service failed!", company);
 		logger.info(">>>>>> DEBUG: REST Response ..." + company);
 	}
-	//@Test
+	@Test
 	public void test6_UpdateCompany() {
-		String resourceURL = serviceURL + "/1";
+		String resourceURL = serviceURL + "/42";
 		logger.info("************* DEBUG: Junit TESTING: test6_UpdateCompany ... :" + resourceURL);
 		Client client = ClientBuilder.newClient();
 		

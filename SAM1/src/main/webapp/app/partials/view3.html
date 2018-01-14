@@ -1,0 +1,37 @@
+<div data-ng-controller="view3Controller">
+<div id="container">
+    		<div id="header">
+    			<p>Project Selection to EDIT: {{projectsSelected[0].name}}</p>
+    		</div>
+   
+   				<table style="width:500px;" cellpadding="1" cellspacing="1" align="left">
+   				
+   					<tr>
+   						<td  align="left"><label for="projectNo">Project_Number:</label></td>
+				    	<td  align="left"><input id="projectNo" type="number" ng-model="project.projectNo"  style="width: 100%;"/></td>
+   					</tr>
+   						
+   					<tr>
+						<td  align="left"><label for="name">Name:</label></td>
+				    	<td  align="left"><input id="name" type="text" ng-model="project.name"  style="width: 100%;"/></td> 					
+   					</tr>
+   						
+   					<tr> 
+						<td  align="left"><label for="startDate">Starting Date:</label></td>
+				    	<td  align="left"><input id="startDate" type="date" ng-model="project.startDate"  style="width: 100%;"/></td>   					
+   					</tr>
+   					<tr> 
+   						<td  align="left"><a href="{{project.link.href}}"  style="width: 100%;">{{projectsSelected[0].link.href}}</a></td>
+   						<td  align="left">
+   							<button data-ng-click="save()"  style="width: 100%;">Save</button>
+   							<button data-ng-click="go('/view2');"  style="width: 100%;">Back to project</button>
+   						</td>  
+   					</tr>
+   					<tr>
+   						<td colspan="2">
+   							<div id="listDiv" class="gridReleasesStyle" ng-grid="gridDetailView3Definition"></div>
+   						</td>
+   					</tr>
+				 </table>
+    	</div>
+</div>

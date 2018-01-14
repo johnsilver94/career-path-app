@@ -76,12 +76,12 @@ public class TestJobOfferServiceRESTArq {
 		Integer nrOfJobOffers = 5;
 		JobOffer jobOffer;
 		
-		Company company =  service.getCompanyById((long)1);
+		//Company company =  service.getCompanyById((long)1);
 		
-		logger.info("Company-------------------- ..."+company.getIdUser());
+		//logger.info("Company-------------------- ..."+company.getIdUser());
 		for(int i=1;i<=nrOfJobOffers;i++) {
 			jobOffer = new JobOffer(null,"Work_Resp_"+nrOfJobOffers);
-			jobOffer.setCompany(company);
+			//jobOffer.setCompany(company);
 			jobOffers = client.target(serviceURL)
 					.request().accept(MediaType.APPLICATION_XML).header("Content-Type", "application/xml")
 					.post(Entity.entity(jobOffer, MediaType.APPLICATION_XML))
@@ -94,9 +94,9 @@ public class TestJobOfferServiceRESTArq {
 		assertTrue("Fail to add JobOffers!",jobOffers.size() >= nrOfJobOffers);
 		jobOffers.stream().forEach(System.out::println);
 	}
-	//@Test
+	@Test
 	public void test3_DeleteJobOffer() {
-		String resourceURL = serviceURL + "/25";
+		String resourceURL = serviceURL + "/64";
 		logger.info("DEBUG: Junit TESTING: test3_DeleteJobOffer ...");
 		Client client = ClientBuilder.newClient();
 		String Response;
@@ -105,7 +105,7 @@ public class TestJobOfferServiceRESTArq {
 	    logger.info(">>>>>> DEBUG: REST Response ..." + Response);
 	    assertTrue("Is not deleted!", Response.contains("True"));
 	}
-	//@Test
+	@Test
 	public void test5_GetByID() {
 		String resourceURL = serviceURL + "/2";
 		logger.info("DEBUG: Junit TESTING: t5_GetByID ...");
@@ -117,9 +117,9 @@ public class TestJobOfferServiceRESTArq {
 		assertNotNull("REST Data Service failed!", jobOffer);
 		logger.info(">>>>>> DEBUG: REST Response ..." + jobOffer);
 	}
-	//@Test
+	@Test
 	public void test6_UpdateJobOffer() {
-		String resourceURL = serviceURL + "/1";
+		String resourceURL = serviceURL + "/2";
 		logger.info("************* DEBUG: Junit TESTING: test6_UpdateJobOffer ... :" + resourceURL);
 		Client client = ClientBuilder.newClient();
 		

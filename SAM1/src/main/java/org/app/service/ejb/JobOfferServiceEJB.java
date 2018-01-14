@@ -73,6 +73,7 @@ public class JobOfferServiceEJB implements JobOfferService {
 	public String remove(@PathParam("id")Long id) throws Exception {
 		JobOffer jobOffer = this.getJobOfferById(id);
 		em.remove(jobOffer);
+		em.flush();
 		return "True";
 	}
 

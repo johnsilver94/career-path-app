@@ -59,7 +59,7 @@ public class TestJobSeekerRESTArq {
 		assertTrue("Fail to read Companies!", jobSeekers.size() >0);
 		jobSeekers.stream().forEach(System.out::println);
 	}
-	//@Test
+	@Test
 	public void test2_AddJobSeeker() {
 		logger.info("DEBUG: Junit TESTING: test2_AddJobSeeker ...");
 		Client client = ClientBuilder.newClient();
@@ -80,9 +80,9 @@ public class TestJobSeekerRESTArq {
 		assertTrue("Fail to add Companies!",jobSeekers.size() >= nrOfJobSeeker);
 		jobSeekers.stream().forEach(System.out::println);
 	}
-	//@Test
+	@Test
 	public void test3_DeleteJobSeeker() {
-		String resourceURL = serviceURL + "/105";
+		String resourceURL = serviceURL + "/127";
 		logger.info("DEBUG: Junit TESTING: test3_DeleteJobSeeker ...");
 		Client client = ClientBuilder.newClient();
 		String Response;
@@ -94,7 +94,7 @@ public class TestJobSeekerRESTArq {
 	}
 	@Test
 	public void test4_GetByID() {
-		String resourceURL = serviceURL + "/7";
+		String resourceURL = serviceURL + "/8";
 		logger.info("DEBUG: Junit TESTING: t4_GetByID ...");
 		
 		JobSeeker jobSeeker = ClientBuilder.newClient().target(resourceURL)
@@ -106,7 +106,7 @@ public class TestJobSeekerRESTArq {
 	}
 	@Test
 	public void test5_UpdateJobSeeker() {
-		String resourceURL = serviceURL + "/7";
+		String resourceURL = serviceURL + "/9";
 		logger.info("************* DEBUG: Junit TESTING: test5_UpdateJobSeeker ... :" + resourceURL);
 		Client client = ClientBuilder.newClient();
 		

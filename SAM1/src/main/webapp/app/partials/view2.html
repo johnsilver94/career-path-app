@@ -1,0 +1,48 @@
+<div data-ng-controller="view2Controller">
+		<div id="container">
+    		<div id="header">
+    			<p>Project Selection to EDIT/UPDATE: {{projectsSelected[0].name}}</p>
+    		</div>
+    		
+    		<div id="menu" style="float:left;">
+    			<div id="listDiv" class="gridProjectsStyle" ng-grid="gridView2Definition"></div>
+    		</div>
+    		
+    		<div id="content" style="float:left;">
+    				<table style="width:500px;" cellpadding="0" cellspacing="0">
+    					<tr>
+    						<td align="left"><label for="projectNo" >Project Number:</label></td>
+					    	<td align="left"><input id="projectNo" type="number" 
+					    		ng-model="projectsSelected[0].projectNo" style="width: 100%;"/></td>
+    					</tr>
+    						
+    					<tr>
+							<td  align="left"><label for="name">Name:</label></td>
+					    	<td  align="left"><input id="name" type="text" 
+					    		ng-model="projectsSelected[0].name" style="width: 100%;"/></td> 					
+    					</tr>
+    						
+    					<tr> 
+							<td  align="left"><label for="startDate" align="left">Starting Date:</label></td>
+					    	<td  align="left"><input id="startDate" type="date" 
+					    		ng-model="projectsSelected[0].startDate" style="width: 100%;"/></td>   					
+    					</tr>
+    					
+						<tr> 
+							<td colspan="2" align="right">
+								<button data-ng-click="add()">Add new</button>
+								<button data-ng-click="save()">Save</button>
+								<button data-ng-click="remove()">Delete</button>
+								<button data-ng-click="cancel()">Cancel</button>
+								<button data-ng-click="go('/view3');">Edit releases</button>
+							</td> 					
+    					</tr>    					
+					 </table>
+    		</div>
+    		
+			<div id="footer">
+    				<a href="{{projectsSelected[0].link.href}}">{{projectsSelected[0].link.href}}</a>
+    		</div>    		
+    	</div>	
+	
+</div>
