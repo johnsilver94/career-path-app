@@ -1,22 +1,19 @@
 var demoAppRest = angular.module('ScrumApp', []);
 
-demoAppRest.controller('projectsController', function($scope) {
+demoAppRest.controller('companiesController', function($scope) {
 	// projects data model
-    $scope.projectsList = [
+    $scope.companiesList = [
 		{
-		    "projectNo": 1,
-		    "name": "Project 1",
-		    "startDate": "2014-04-10"
+		    "idUser": 1,
+		    "companyName": "Company 1"
 		},
 		{
-		    "projectNo": 2,
-		    "name": "Project 1",
-		    "startDate": "2014-04-10"
+		    "idUser": 2,
+		    "companyName": "Company 2"
 		},
 		{
-		    "projectNo": 3,
-		    "name": "Project 1",
-		    "startDate": "2014-04-10"
-		}		
+		    "idUser": 3,
+		    "companyName": "Company 3"
+		}	
     ];
 });

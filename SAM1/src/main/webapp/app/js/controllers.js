@@ -4,14 +4,14 @@ app.controller('mainController',
   function($scope, $http, $timeout, restResource) {	// implementation
 	console.log("mainController");
 	
-	$scope.projectsSelected = [];
-	$scope.releasesList = [];
-	$scope.releaseSelected = [];
+	$scope.companiesSelected = [];
+	$scope.JobOffersList = [];
+	$scope.JobOfferSelected = [];
 	
-	$http.get(projectsRestURL)
+	$http.get(companiesRestURL)
 	.success(function(data){
-		console.log("mainController:GET URL : " + projectsRestURL);
-		$scope.projectsList = data;
+		console.log("mainController:GET URL : " + companiesRestURL);
+		$scope.companiesList = data;
 	});
 }]);
 
@@ -26,31 +26,33 @@ app.controller('view1Controller',
 	};
 	
 	$scope.gridView1Definition = { 
-		      data: 'projectsList',
-		      selectedItems: $scope.projectsSelected,
+		      data: 'companiesList',
+		      selectedItems: $scope.companiesSelected,
 		      enablePaging: true,
 		      multiSelect: false,
 		      resizable: true,
 		      showFilter: true, showColumnMenu:true,
-		      sortInfo: { fields: ['projectNo'], directions: ['asc'] },
+		      sortInfo: { fields: ['idUser'], directions: ['asc'] },
 		      filterOptions: $scope.filterOptions,
-		      width: 420,
+		      width: 650,
 		      heigh: 100,
-		      columnDefs: [{ field: "projectNo", width: 120, displayName: 'ID'},
-		                   { field: "name", width: 300 , displayName: 'Name' }]   
+		      columnDefs: [{ field: "idUser", width: 50, displayName: 'ID'},
+		    	  		   { field: "userName", width: 100 , displayName: 'User_Name' },
+		    	  		   { field: "passWord", width: 100 , displayName: 'Pass_Word' },
+		                   { field: "companyName", width: 400 , displayName: 'Company_Name' }]   
 		    };		
 	
-	$http.get(projectsRestURL)
+	$http.get(companiesRestURL)
 	.success(function(data){
-		console.log("view1Controller::GET URL : " + projectsRestURL);
-		$scope.projectsList = data;
+		console.log("view1Controller::GET URL : " + companiesRestURL);
+		$scope.companiesList = data;
 	})
 	.error(function(data){
 		console.log('ERROR');
 		console.log(data);
 	});		
 	
-	$scope.view1_name = "Project list";
+	$scope.view1_name = "Companies list";
 }]);
 
 
@@ -61,28 +63,30 @@ app.controller('view2Controller',
 	console.log("view2Controller");
 	
     $scope.gridView2Definition = { 
-      data: 'projectsList',
-      selectedItems: $scope.projectsSelected,
+      data: 'companiesList',
+      selectedItems: $scope.companiesSelected,
       enablePaging: true,
       multiSelect: false,
       resizable: true,
-      sortInfo: { fields: ['projectNo'], directions: ['asc'] },
-      width: 420,
+      sortInfo: { fields: ['idUser'], directions: ['asc'] },
+      width: 650,
       heigh: 100,
-      columnDefs: [{ field: "projectNo", width: 120, displayName: 'ID'},
-                   { field: "name", width: 300 , displayName: 'Name' }]
+      columnDefs: [{ field: "idUser", width: 50, displayName: 'ID'},
+ 		   			{ field: "userName", width: 100 , displayName: 'User_Name' },
+ 		   			{ field: "passWord", width: 100 , displayName: 'Pass_Word' },
+ 		   			{ field: "companyName", width: 400 , displayName: 'Company_Name' }]
     };
 
-	restResource.get(projectsRestURL).then(function (data) {
+	restResource.get(companiesRestURL).then(function (data) {
 		console.log(data);
-		$scope.projectsList = data;
+		$scope.companiesList = data;
 		$timeout(function() {
 			idx = 0;
-			console.log("project to select [back]: ");
-			console.log($scope.projectsSelected[0]);			
-			if ($scope.projectsSelected[0] != null){
-				for(i in $scope.projectsList){
-					if ($scope.projectsList[i].projectNo == $scope.projectsSelected[0].projectNo)
+			console.log("company to select [back]: ");
+			console.log($scope.companiesSelected[0]);			
+			if ($scope.companiesSelected[0] != null){
+				for(i in $scope.companiesList){
+					if ($scope.companiesList[i].projectNo == $scope.companiesSelected[0].idUser)
 						idx = i;
 				}
 			}
@@ -92,27 +96,19 @@ app.controller('view2Controller',
     
     $scope.add = function(){
     	console.log("view2Controller: add action");
-    	project = $scope.projectsSelected[0];
-    	newProject = JSON.parse(JSON.stringify(project));
+    	company = $scope.companiesSelected[0];
+    	newCompany = JSON.parse(JSON.stringify(company));
     	//
-    	newProject.projectNo = 9999;
-    	newProject.name = "New project 9999";
-    	newProject.releases = [];
+    	newCompany.idUser = 9999;
+    	newCompany.companyName = "New company";
+    	newCompany.listJobOffer = [];
     	
-    	today = new Date();
-    	dd = today.getDate();
-    	mm = today.getMonth()+1; //January is 0!
-    	yyyy = today.getFullYear();
-    	if (mm < 10)
-    		mm = '0' + mm;
-    	newProject.startDate = yyyy + "-" + mm + "-" + dd;
-    	console.log(newProject.startDate);
-    	newProject.link.href = newProject.link.href.replace(project.projectNo, newProject.projectNo);
-    	console.log(newProject.link.href);
+    	newCompany.link.href = newCompany.link.href.replace(company.idUser, newCompany.idUser);
+    	console.log(newCompany.link.href);
     	
     	//
-    	$scope.projectsList.push(newProject);
-    	idx = $scope.projectsList.indexOf(newProject);
+    	$scope.companiesList.push(newCompany);
+    	idx = $scope.companiesList.indexOf(newCompany);
     	
     	$timeout(function() {
     		console.log(idx);
@@ -123,10 +119,10 @@ app.controller('view2Controller',
     
     $scope.save = function(){
     	console.log("view2Controller: save action");
-    	if($scope.projectsSelected[0] == null)
+    	if($scope.companiesSelected[0] == null)
     		return;
-    	project = $scope.projectsSelected[0];
-    	restResource.post(project);	
+    	company = $scope.companiesSelected[0];
+    	restResource.post(company);	
     };
     
     $scope.cancel = function(){
@@ -135,14 +131,14 @@ app.controller('view2Controller',
     
     $scope.remove = function(){
     	console.log("view2Controller: remove action");
-    	project = $scope.projectsSelected[0];
-    	link = project.link.href;
+    	company = $scope.companiesSelected[0];
+    	link = company.link.href;
     	
     	// remove local model
-    	var idx = $scope.projectsList.indexOf(project);      	
+    	var idx = $scope.companiesList.indexOf(company);      	
     	
-    	restResource.remove(project).then(function(data){
-    		$scope.projectsList.splice(idx, 1);
+    	restResource.remove(company.idUser).then(function(data){
+    		$scope.companiesList.splice(idx, 1);
     		$timeout(function() { $scope.gridOptions.selectRow(0, true); });    		
     	});
     	
@@ -160,31 +156,31 @@ app.controller('view3Controller',
 	console.log("view3Controller");
 	
     $scope.gridDetailView3Definition = { 
-      data: 'releasesList',
-      selectedItems: $scope.releaseSelected,
+      data: 'JobOffersList',
+      selectedItems: $scope.JobOfferSelected,
       enablePaging: true,
       multiSelect: false,
       resizable: true,
       enableCellSelection: true,
       enableRowSelection: false,
       enableCellEdit: true,
-      width: 600,
-      columnDefs: [{ field: "releaseId", width: 120, displayName: 'ID', enableCellEdit: true},
-                   { field: "indicative", width: 180 , displayName: 'Indicative', enableCellEdit: true },
-                   { field: "publishDate", width: 300 , displayName: 'PublishDate', enableCellEdit: true }
+      width: 300,
+      columnDefs: [{ field: "idOffer", width: 120, displayName: 'Id', enableCellEdit: true},
+                   { field: "responsabilities", width: 180 , displayName: 'Responsabilities', enableCellEdit: true }
                    ]
     };		
 	
-	// projects data model
-    projectRestURL = $scope.projectsSelected[0].link.href;
-	console.log("projectsRestURL:::: " + projectRestURL);
+	// companies data model
+    JobOfferRestURL = $scope.companiesSelected[0].link.href;
+	console.log(" JobOfferRestURL:::: " + JobOfferRestURL);
 	//
-	restResource.get(projectRestURL).then(function (data) {
+	restResource.get(JobOfferRestURL).then(function (data) {
 		console.log(data);
-		$scope.project = data;
-		$scope.releasesList = $scope.project.releases;
+		$scope.company = data;
+		$scope.JobOffersList = $scope.company.jobOffer;
 		console.log("check resource: ");
 		console.log(restResource.entity);
+		console.log($scope.company.jobOffer[0].idOffer);
 	});
 	//
 	$scope.go = function ( path ) {
@@ -193,10 +189,18 @@ app.controller('view3Controller',
 	//
 	$scope.save = function(){
     	console.log("view3Controller: save action");
-    	console.log($scope.project);
-    	if($scope.project == null)
+    	console.log($scope.company);
+    	if($scope.company == null)
     		return;  	
     	restResource.put();
-    };
-	
+    };	
+}]);
+//about
+app.controller('about', 
+	  ['$scope', '$http', '$timeout', '$location', 'restResource',	// dependencies
+	  function($scope, $http, $timeout, $location, restResource) {
+		
+		  $scope.go = function ( path ) {
+		  	  $location.path( path );
+			}; 
 }]);

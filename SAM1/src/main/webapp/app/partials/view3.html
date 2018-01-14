@@ -1,35 +1,43 @@
 <div data-ng-controller="view3Controller">
 <div id="container">
     		<div id="header">
-    			<p>Project Selection to EDIT: {{projectsSelected[0].name}}</p>
+    			<p>Company Selection to EDIT: {{companiesSelected[0].companyName}}</p>
     		</div>
    
    				<table style="width:500px;" cellpadding="1" cellspacing="1" align="left">
    				
    					<tr>
-   						<td  align="left"><label for="projectNo">Project_Number:</label></td>
-				    	<td  align="left"><input id="projectNo" type="number" ng-model="project.projectNo"  style="width: 100%;"/></td>
+   						<td  align="left"><label for="idUser">Company Id:</label></td>
+				    	<td  align="left"><input id="idUser" type="number" ng-model="company.idUser"  style="width: 100%;"/></td>
    					</tr>
-   						
+   					
    					<tr>
-						<td  align="left"><label for="name">Name:</label></td>
-				    	<td  align="left"><input id="name" type="text" ng-model="project.name"  style="width: 100%;"/></td> 					
+						<td  align="left"><label for="userName">User Name:</label></td>
+				    	<td  align="left"><input id="userName" type="text" 
+				    		ng-model="companiesSelected[0].userName" style="width: 100%;"/></td> 					
    					</tr>
-   						
-   					<tr> 
-						<td  align="left"><label for="startDate">Starting Date:</label></td>
-				    	<td  align="left"><input id="startDate" type="date" ng-model="project.startDate"  style="width: 100%;"/></td>   					
+    					
+   					<tr>
+						<td  align="left"><label for="passWord">Password:</label></td>
+				    	<td  align="left"><input id="passWord" type="text" 
+					    		ng-model="companiesSelected[0].passWord" style="width: 100%;"/></td> 					
+   					</tr>	
+   					
+   					<tr>
+						<td  align="left"><label for="companyName">Company Name:</label></td>
+				    	<td  align="left"><input id="companyName" type="text" ng-model="company.companyName"  style="width: 100%;"/></td> 					
    					</tr>
+   					
    					<tr> 
-   						<td  align="left"><a href="{{project.link.href}}"  style="width: 100%;">{{projectsSelected[0].link.href}}</a></td>
+   						<td  align="left"><a href="{{company.link.href}}"  style="width: 100%;">{{companiesSelected[0].link.href}}</a></td>
    						<td  align="left">
    							<button data-ng-click="save()"  style="width: 100%;">Save</button>
-   							<button data-ng-click="go('/view2');"  style="width: 100%;">Back to project</button>
+   							<button data-ng-click="go('/view2');"  style="width: 100%;">Back to company</button>
    						</td>  
    					</tr>
    					<tr>
    						<td colspan="2">
-   							<div id="listDiv" class="gridReleasesStyle" ng-grid="gridDetailView3Definition"></div>
+   							<div id="listDiv" class="gridJobOffersStyle" ng-grid="gridDetailView3Definition"></div>
    						</td>
    					</tr>
 				 </table>

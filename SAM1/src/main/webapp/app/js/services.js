@@ -26,7 +26,7 @@ app.factory('restResource', ['$http', '$q', function($http,  $q){
 			return deferred.promise;
 		},
 		put : function(data){
-			console.log("restProjectResource:PUTING ");
+			console.log("restCompanyResource:PUTING ");
 			var deferred = $q.defer();
 			
 			if (data == null)
@@ -38,7 +38,7 @@ app.factory('restResource', ['$http', '$q', function($http,  $q){
 			
 			$http.put(this.url,putData)
 	    	.success(function(data){
-	    		console.log("restProjectResource:PUTTED");
+	    		console.log("restCompanyResource:PUTTED");
 	    		console.log(data);
 	    		deferred.resolve(data);
 	    	})
@@ -49,7 +49,7 @@ app.factory('restResource', ['$http', '$q', function($http,  $q){
 			return deferred.promise; 
 		},		
 		post : function(data){
-			console.log("restProjectResource:POSTING ");
+			console.log("restCompanyResource:POSTING ");
 			var deferred = $q.defer();
 			
 			if (data == null)
@@ -61,7 +61,7 @@ app.factory('restResource', ['$http', '$q', function($http,  $q){
 			
 			$http.post(this.url,postData)
 	    	.success(function(data){
-	    		console.log("restProjectResource:POSTED");
+	    		console.log("restCompanyResource:POSTED");
 	    		console.log(data);
 	    		deferred.resolve(data);
 	    	})
@@ -72,7 +72,7 @@ app.factory('restResource', ['$http', '$q', function($http,  $q){
 			return deferred.promise; 			
 		},
 		remove : function(data){
-			console.log("restProjectResource:DELETING ");
+			console.log("restCompanyResource:DELETING ");
 			var deferred = $q.defer();
 			
 			if (data == null)
@@ -92,7 +92,7 @@ app.factory('restResource', ['$http', '$q', function($http,  $q){
 //			$http.delete(this.url, deleteData, config)
 			$http(config)
 	    	.success(function(data){
-	    		console.log("restProjectResource:DELETED");
+	    		console.log("restCompanyResource:DELETED");
 	    		console.log(data);
 	    		deferred.resolve(data);
 	    	})

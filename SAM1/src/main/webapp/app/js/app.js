@@ -2,7 +2,7 @@
 // Rest Data Service URL is: 	http://localhost:8080/SCRUM/data/projects
 
 var app = angular.module('App', ['ngGrid', 'ngRoute', 'ngResource']);
-var projectsRestURL = 'http://localhost:8080/SAM/data/companies';
+var companiesRestURL = 'http://localhost:8080/SAM/data/companies';
 
 //App navigation control
 app.config(

@@ -66,6 +66,7 @@ public abstract class Users implements Serializable{
 	public List<Message> getListMessages() {
 		return listMessages;
 	}
+	@XmlElement
 	public Long getIdUser() {
 		return idUser;
 	}

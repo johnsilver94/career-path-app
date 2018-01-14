@@ -1,13 +1,13 @@
 /*-------------------------
 	grid-style
 --------------------------*/
-.gridProjectsStyle {
+.gridCompaniesStyle {
     border: 1px solid rgb(212,212,212);
-    width: 400px; 
+    width: 650px; 
     height: 300px;
     
 }
-.gridReleasesStyle {
+.gridJobOffersStyle {
     border: 1px solid rgb(212,212,212);
     width: 600px; 
     height: 300px;
@@ -91,9 +91,9 @@ nav a:last-child{
 	border-radius:0 2px 2px 0;
 }
 
-nav.projectList 	.projectList,
-nav.projectForm 	.projectForm,
-nav.projectReleases .projectReleases,
+nav.companyList 	.companyList,
+nav.companyForm 	.companyForm,
+nav.companyReleases .companyReleases,
 nav.about 			.about
 {
 	background-color: #C0C0C0;
