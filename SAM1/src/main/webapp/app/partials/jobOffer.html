@@ -1,0 +1,9 @@
+<div data-ng-controller="jobOfferController">
+	<h3>jobOffer: {{jobOffer_name}}</h3>
+	<strong>Filter:</strong> </string><input type="text" ng-model="filterOptions.filterText" />
+	<br><br>
+    <div id="menu" style="float:left;" class="gridjobOfferStyle" ng-grid="gridjobOfferDefinition"></div>	
+    <div id="content" style="float:left;" class="gridjobOfferSkillStyle" ng-grid="gridjobOfferSkillDefinition">
+    	<h3>{{jobOffersSelected[0].idOffer}} Required Skills:</h3>
+    </div>	
+</div>

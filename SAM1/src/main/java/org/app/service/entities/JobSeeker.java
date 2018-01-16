@@ -13,8 +13,10 @@ import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.DiscriminatorValue;
+import static javax.persistence.FetchType.LAZY;
 @XmlRootElement(name="jobSeeker") 
 @XmlAccessorType(XmlAccessType.NONE)
 @Entity
@@ -29,7 +31,7 @@ public class JobSeeker extends Users{
 	String 	surname;
 	@OneToOne
 	Preference preference;
-	@OneToMany
+	@OneToMany(cascade = ALL, orphanRemoval = true)
 	List<Skill> pathTestSkill;
 	@OneToOne
 	CV cv;
@@ -42,6 +44,34 @@ public class JobSeeker extends Users{
 	public JobSeeker() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	@XmlElement
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	@XmlElement
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	@XmlElement
+	public String getSurname() {
+		return surname;
+	}
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	
+	public List<Skill> getPathTestSkill() {
+		return pathTestSkill;
+	}
+	public void setPathTestSkill(List<Skill> pathTestSkill) {
+		this.pathTestSkill = pathTestSkill;
 	}
 	public JobSeeker(Long idUser, String userName, String passWord) {
 		super(idUser, userName, passWord);

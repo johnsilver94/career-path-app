@@ -17,7 +17,7 @@ import org.app.service.entities.Location;
 import org.app.service.entities.Message;
 import org.app.service.entities.Users;
 
-//@Path("/service")
+@Path("/users")
 @Stateless @LocalBean
 public class UserServiceEJB extends EntityRepositoryBase<Users>  implements UserService {
 	private static Logger logger = Logger.getLogger(UserServiceEJB.class.getName());

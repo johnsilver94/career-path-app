@@ -25,11 +25,14 @@
 	</head>
 
 	<body data-ng-controller="mainController">
-		<p>Career Path WebApplication 2.0</p>
+		<p>Career Path WebApplication 3.0</p>
 		<nav class="{{active}}" >
 			<a href="#/view1" class="companyList" ng-click="active='companyList'">Companies</a>
 			<a href="#/view2" class="companyForm" ng-click="active='companyForm'">Company-Form</a>
 			<a href="#/view3" class="companyJobOffers" ng-click="active='companyJobOffers'">Company - JobOffers</a>
+			<a href="#/jobSeeker" class="jobSeekerList" ng-click="active='jobSeekerList'">JobSeekers</a>
+			<a href="#/jobSeekerForm" class="jobSeekerForm" ng-click="active='jobSeekerForm'">JobSeeker-Form</a>
+			<a href="#/jobOffer" class="jobOfferList" ng-click="active='jobOfferList'">JobOffers</a>
 			<a href="#/about" class="about" ng-click="active='about'">About</a>
 			<a href="https://github.com/silverfang94/myRepo/tree/master/SAM1" /*class="GitHubLink" ng-click="active='GitHubLink'"*/>GitHub</a>
 		</nav>

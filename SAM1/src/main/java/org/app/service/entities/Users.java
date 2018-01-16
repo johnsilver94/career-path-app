@@ -13,8 +13,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.SequenceGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import static javax.persistence.CascadeType.ALL;
@@ -22,6 +25,8 @@ import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.SEQUENCE;
 import static javax.persistence.FetchType.LAZY;
 
+@XmlRootElement(name="users")
+@XmlAccessorType(XmlAccessType.NONE)
 @Entity
 @Inheritance(strategy = TABLE_PER_CLASS)
 public abstract class Users implements Serializable{
@@ -111,5 +116,14 @@ public abstract class Users implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public static String BASE_URL = "http://localhost:8080/SAM/data/users";
+	
+	@XmlElement(name="link") 
+	public AtomLink getLink() throws Exception
+	{
+		String restUrl = BASE_URL +"/" + this.getIdUser();
+		return new AtomLink(restUrl,"get-Company");
+	}
+	public void setLink(AtomLink link) {}
 	
 }

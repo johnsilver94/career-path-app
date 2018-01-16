@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.EAGER;
 
 @XmlRootElement(name="jobOffer") 
 @XmlAccessorType(XmlAccessType.NONE)
@@ -47,7 +48,7 @@ public class JobOffer implements Serializable{
 	WorkEnvironment workEnvironment;
 	@Enumerated(EnumType.STRING)
 	JOStatus status;
-	@OneToMany
+	@OneToMany(orphanRemoval = true, cascade = ALL, fetch = EAGER)
 	List<Skill> listRequiredSkills;  
 	// Maybe list must mapped in JobSeeker class
 	@ManyToMany(cascade = ALL, mappedBy = "listJobOfferAplication")
@@ -97,24 +98,28 @@ public class JobOffer implements Serializable{
 	public void setResponsabilities(String responsabilities) {
 		this.responsabilities = responsabilities;
 	}
+	@XmlElement
 	public WorkHours getWorkHours() {
 		return workHours;
 	}
 	public void setWorkHours(WorkHours workHours) {
 		this.workHours = workHours;
 	}
+	@XmlElement
 	public WorkEnvironment getWorkEnvironment() {
 		return workEnvironment;
 	}
 	public void setWorkEnvironment(WorkEnvironment workEnvironment) {
 		this.workEnvironment = workEnvironment;
 	}
+	@XmlElement
 	public JOStatus getStatus() {
 		return status;
 	}
 	public void setStatus(JOStatus status) {
 		this.status = status;
 	}
+	@XmlElementWrapper(name = "skills") @XmlElement(name = "skill")
 	public List<Skill> getListRequiredSkills() {
 		return listRequiredSkills;
 	}

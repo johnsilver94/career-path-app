@@ -13,6 +13,25 @@
     height: 300px;
     
 }
+.gridjobSeekerStyle{
+    border: 1px solid rgb(212,212,212);
+    width:  550px; 
+    height: 300px;
+    
+}
+.gridjobOfferStyle{
+    border: 1px solid rgb(212,212,212);
+    width:  550px; 
+    height: 300px;
+    
+}
+.gridjobOfferSkillStyle{
+    border: 1px solid rgb(212,212,212);
+    width:  250px; 
+    height: 200px;
+    
+}
+
 .selectedItems{
     
 }
