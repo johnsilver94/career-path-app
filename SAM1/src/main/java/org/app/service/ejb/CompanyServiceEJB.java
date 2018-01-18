@@ -53,7 +53,7 @@ public class CompanyServiceEJB implements CompanyService {
 	
 	
 	@PUT @Path("/{id}")
-	@Consumes({MediaType.APPLICATION_XML/*, MediaType.APPLICATION_JSON*/})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	@Override
@@ -95,6 +95,7 @@ public class CompanyServiceEJB implements CompanyService {
 	}
 	
 	@DELETE @Path("/{id}") 
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public String remove(@PathParam("id")Long id) throws Exception {
 		Company company = this.getCompanyById(id);

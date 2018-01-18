@@ -216,8 +216,9 @@ public class EntityRepositoryBase<T extends Object> implements EntityRepository<
 	public boolean remove(T entity) {
 //		em.getTransaction().begin();
 		try {
-			entity = em.merge(entity);
+			//entity = em.merge(entity);
 			em.remove(entity);
+			em.flush();
 //			em.getTransaction().commit();
 			return true;
 		} catch (Exception e) {

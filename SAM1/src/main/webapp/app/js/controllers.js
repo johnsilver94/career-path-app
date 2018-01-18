@@ -91,7 +91,7 @@ app.controller('view2Controller',
 		console.log(data);
 		$scope.companiesList = data;
 		$timeout(function() {
-			idx = 0;
+			idx = 1;
 			console.log("company to select [back]: ");
 			console.log($scope.companiesSelected[0]);			
 			if ($scope.companiesSelected[0] != null){
@@ -106,25 +106,20 @@ app.controller('view2Controller',
     
     $scope.add = function(){
     	console.log("view2Controller: add action");
-    	company = $scope.companiesSelected[0];
+    	company = $scope.companiesList[0];
     	newCompany = JSON.parse(JSON.stringify(company));
-    	//
-    	newCompany.idUser = 9999;
-    	newCompany.companyName = "New company";
-    	newCompany.listJobOffer = [];
+
+    	newCompany.idUser = null;
+    	newCompany.companyName = "New record";
     	
-    	newCompany.link.href = newCompany.link.href.replace(company.idUser, newCompany.idUser);
-    	console.log(newCompany.link.href);
+    	idx = $scope.companiesList.length-2;
     	
-    	//
+    	restResource.post(newCompany);
     	$scope.companiesList.push(newCompany);
-    	idx = $scope.companiesList.indexOf(newCompany);
+    	location.reload();
     	
-    	$timeout(function() {
-    		console.log(idx);
-    		$timeout(function() { $scope.gridOptions.selectRow(idx, true); });
-    	});    	
-    	
+		console.log(idx);
+		try{ $scope.gridOptions.selectRow(idx, true); } catch(e){}    	
     };
     
     $scope.save = function(){
@@ -137,6 +132,7 @@ app.controller('view2Controller',
     
     $scope.cancel = function(){
     	console.log("view2Controller: cancel action");
+    	$scope.gridView2Definition.selectRow(0, true);
     };    
     
     $scope.remove = function(){
@@ -147,9 +143,9 @@ app.controller('view2Controller',
     	// remove local model
     	var idx = $scope.companiesList.indexOf(company);      	
     	
-    	restResource.remove(company.idUser).then(function(data){
+    	restResource.remove(company).then(function(data){
     		$scope.companiesList.splice(idx, 1);
-    		$timeout(function() { $scope.gridOptions.selectRow(0, true); });    		
+    		$timeout(function() { $scope.gridView2Definition.selectRow(0, true); });    		
     	});
     	
     };    
@@ -185,12 +181,14 @@ app.controller('view3Controller',
 	console.log(" JobOfferRestURL:::: " + JobOfferRestURL);
 	//
 	restResource.get(JobOfferRestURL).then(function (data) {
-		console.log(data);
 		$scope.company = data;
 		$scope.JobOffersList = $scope.company.jobOffer;
 		console.log("check resource: ");
 		console.log(restResource.entity);
-		console.log($scope.company.jobOffer[0].idOffer);
+		if($scope.company.jobOffer.length != 0)
+		{
+			console.log($scope.company.jobOffer[0].idOffer);
+		}
 	});
 	//
 	$scope.go = function ( path ) {
@@ -199,10 +197,13 @@ app.controller('view3Controller',
 	//
 	$scope.save = function(){
     	console.log("view3Controller: save action");
-    	console.log($scope.company);
-    	if($scope.company == null)
-    		return;  	
-    	restResource.put();
+    	if($scope.companiesSelected[0] == null)
+    		return;
+    	company = $scope.companiesSelected[0];
+    	restResource.get(companiesRestURL).then(function (data) {
+    		console.log(data);
+    		});  
+    	restResource.post(company);
     };	
 }]);
 //about
@@ -285,8 +286,8 @@ app.controller('jobSeekerFormController',
 					console.log("jobSeekerList to select [back]: ");
 					console.log($scope.jobSeekersSelected[0]);			
 					if ($scope.jobSeekersSelected[0] != null){
-						for(i in $scope.companiesList){
-							if ($scope.companiesList[i].projectNo == $scope.jobSeekersSelected[0].idUser)
+						for(i in $scope.jobSeekerList){
+							if ($scope.jobSeekerList[i].idUser == $scope.jobSeekersSelected[0].idUser)
 								idx = i;
 						}
 					}
@@ -299,17 +300,13 @@ app.controller('jobSeekerFormController',
 		    	jobSeeker = $scope.jobSeekersSelected[0];
 		    	newJobSeeker = JSON.parse(JSON.stringify(jobSeeker));
 		    	//
-		    	newJobSeeker.idUser = 1111;
+		    	newJobSeeker.idUser = null;
 		    	newJobSeeker.age = 99;
 		    	newJobSeeker.name = "New";
 		    	newJobSeeker.surname = "New";
 		    	
-		    	newJobSeeker.link.href = newJobSeeker.link.href.replace(jobSeeker.idUser, newJobSeeker.idUser);
-		    	console.log(newJobSeeker.link.href);
-		    	
-		    	//
-		    	$scope.jobSeekerList.push(newJobSeeker);
-		    	idx = $scope.jobSeekerList.indexOf(newJobSeeker);
+		    	restResource.post(newJobSeeker);
+		    	location.reload();
 		    	
 		    	$timeout(function() {
 		    		console.log(idx);
@@ -323,7 +320,7 @@ app.controller('jobSeekerFormController',
 		    	if($scope.jobSeekersSelected[0] == null)
 		    		return;
 		    	jobSeeker = $scope.jobSeekersSelected[0];
-		    	restResource.post(jobSeeker);	
+		    	restResource.post(jobSeeker);
 		    };
 		    
 		    $scope.cancel = function(){
@@ -333,14 +330,13 @@ app.controller('jobSeekerFormController',
 		    $scope.remove = function(){
 		    	console.log("jobSeekerFormController: remove action");
 		    	jobSeeker = $scope.jobSeekersSelected[0];
-		    	link = company.link.href;
 		    	
 		    	// remove local model
 		    	var idx = $scope.jobSeekerList.indexOf(jobSeeker);      	
 		    	
-		    	restResource.remove(jobSeeker.idUser).then(function(data){
+		    	restResource.remove(jobSeeker).then(function(data){
 		    		$scope.jobSeekerList.splice(idx, 1);
-		    		$timeout(function() { $scope.gridOptions.selectRow(0, true); });    		
+		    		$timeout(function() { $scope.gridjobSeekerFormDefinition.selectRow(0, true); });    		
 		    	});
 		    	
 		    };    
