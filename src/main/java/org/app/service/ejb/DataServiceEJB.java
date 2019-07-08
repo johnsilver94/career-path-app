@@ -18,7 +18,7 @@ import org.app.service.entities.EntityBase;
  * Session Bean implementation class ScrumTeamRepositoryService
  * Aggregate Repository Service Facade: Project - features - releases
  */
-@Path("/service") // http://localhost:8080/SAM1/rest/service
+@Path("/service") // http://localhost:8080/SAM/data/service
 // 1. Remote interface
 @Stateless
 @LocalBean
